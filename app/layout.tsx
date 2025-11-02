@@ -1,11 +1,27 @@
-export const metadata = { title: "Creator Being" };
+import type React from "react"
+import type { Metadata } from "next"
+import { Inter } from "next/font/google"
+import "./globals.css"
+import ClientLayout from "./client-layout"
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+const inter = Inter({ subsets: ["latin"] })
+
+export const metadata: Metadata = {
+  title: "Creator Being",
+  description: "A living philosophy for shaping life from the inside out",
+    generator: 'v0.app'
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
-      <body style={{ fontFamily: "system-ui, sans-serif", padding: 24 }}>
-        {children}
+      <body className={inter.className}>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
-  );
+  )
 }
