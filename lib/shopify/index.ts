@@ -152,6 +152,7 @@ export async function getProduct(handle: string): Promise<ShopifyProduct | null>
         description
         descriptionHtml
         handle
+        availableForSale
         productType
         category {
           id
@@ -507,9 +508,14 @@ export async function updateCartLines(
                       amount
                       currencyCode
                     }
+                    selectedOptions {
+                      name
+                      value
+                    }
                     product {
                       title
-                      images(first: 1) {
+                      handle
+                      images(first: 10) {
                         edges {
                           node {
                             url
@@ -525,6 +531,14 @@ export async function updateCartLines(
           }
           cost {
             totalAmount {
+              amount
+              currencyCode
+            }
+            subtotalAmount {
+              amount
+              currencyCode
+            }
+            totalTaxAmount {
               amount
               currencyCode
             }
