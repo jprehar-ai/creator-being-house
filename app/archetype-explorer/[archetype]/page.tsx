@@ -1184,10 +1184,10 @@ export default function ArchetypePage({ params }: ArchetypePageProps) {
 
   if (!currentArchetype) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gray-950">
         <div className="text-center">
-          <h1 className="text-2xl font-light text-gray-800 mb-4">Archetype not found</h1>
-          <Link href="/archetype-explorer" className="text-amber-600 hover:text-amber-700">
+          <h1 className="text-2xl font-light text-white mb-4">Archetype not found</h1>
+          <Link href="/archetype-explorer" className="text-purple-400 hover:text-purple-300">
             ← Back to Explorer
           </Link>
         </div>
@@ -1207,16 +1207,16 @@ export default function ArchetypePage({ params }: ArchetypePageProps) {
   ]
 
   return (
-    <div className="relative min-h-screen" id="top">
-      {/* Soft Background */}
-      <div className="fixed inset-0 z-[-2]">
-        <div className="absolute inset-0 bg-gradient-to-br from-amber-50/50 via-white to-pink-50/50" />
+    <div className="relative min-h-screen bg-gray-950" id="top">
+      {/* Soft Background - matching main page */}
+      <div className="fixed inset-0 z-[-1] bg-gray-950">
+        {/* Purple/Pink orb - top left */}
         <motion.div
-          className="absolute top-[10%] left-[5%] w-[40vw] h-[40vw] rounded-full bg-amber-300/10 blur-[120px]"
+          className="absolute top-0 left-0 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-purple-500 to-pink-500 opacity-20 blur-[120px]"
           animate={{
             x: [0, 50, 0],
-            y: [0, -30, 0],
-            scale: [1, 1.2, 1],
+            y: [0, 30, 0],
+            scale: [1, 1.1, 1],
           }}
           transition={{
             duration: 20,
@@ -1224,17 +1224,64 @@ export default function ArchetypePage({ params }: ArchetypePageProps) {
             repeatType: "reverse",
           }}
         />
+        {/* Blue/Cyan orb - top right */}
         <motion.div
-          className="absolute bottom-[10%] right-[5%] w-[30vw] h-[30vw] rounded-full bg-pink-300/10 blur-[100px]"
+          className="absolute top-20 right-0 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 opacity-20 blur-[120px]"
           animate={{
             x: [0, -40, 0],
-            y: [0, 20, 0],
-            scale: [1, 1.1, 1],
+            y: [0, 50, 0],
+            scale: [1, 1.15, 1],
+          }}
+          transition={{
+            duration: 18,
+            repeat: Number.POSITIVE_INFINITY,
+            repeatType: "reverse",
+            delay: 2,
+          }}
+        />
+        {/* Orange/Yellow orb - middle */}
+        <motion.div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-gradient-to-br from-orange-500 to-yellow-500 opacity-15 blur-[140px]"
+          animate={{
+            scale: [1, 1.2, 1],
+            rotate: [0, 90, 0],
           }}
           transition={{
             duration: 25,
             repeat: Number.POSITIVE_INFINITY,
             repeatType: "reverse",
+            delay: 1,
+          }}
+        />
+      </div>
+
+      {/* Flowing Shapes */}
+      <div className="fixed inset-0 z-[-1] overflow-hidden">
+        <motion.div
+          className="absolute top-[10%] left-[5%] w-[40vw] h-[40vw] rounded-full bg-amber-300/20 blur-[100px]"
+          animate={{
+            x: [0, 30, 0],
+            y: [0, -30, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Number.POSITIVE_INFINITY,
+            repeatType: "reverse",
+          }}
+        />
+        <motion.div
+          className="absolute top-[40%] right-[10%] w-[35vw] h-[35vw] rounded-full bg-pink-300/20 blur-[120px]"
+          animate={{
+            x: [0, -40, 0],
+            y: [0, 40, 0],
+            scale: [1, 1.15, 1],
+          }}
+          transition={{
+            duration: 18,
+            repeat: Number.POSITIVE_INFINITY,
+            repeatType: "reverse",
+            delay: 1,
           }}
         />
       </div>
@@ -1244,7 +1291,7 @@ export default function ArchetypePage({ params }: ArchetypePageProps) {
         <div className="container mx-auto px-6">
           <Link
             href="/archetype-explorer"
-            className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-800 mb-8 transition-colors backdrop-blur-sm bg-white/60 px-4 py-2 rounded-full shadow-sm"
+            className="inline-flex items-center gap-2 text-gray-400 hover:text-white mb-8 transition-colors backdrop-blur-sm bg-gray-900/40 px-4 py-2 rounded-full border border-white/10"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to All Archetypes
@@ -1262,15 +1309,15 @@ export default function ArchetypePage({ params }: ArchetypePageProps) {
               transition={{ duration: 0.8 }}
               className="mb-12"
             >
-              <span className="bg-amber-100 text-amber-700 px-4 py-2 rounded-full text-sm font-medium border border-amber-200 mb-6 inline-block">
+              <span className="bg-purple-500/20 text-purple-300 px-4 py-2 rounded-full text-sm font-light tracking-wide border border-purple-500/30 mb-6 inline-block">
                 {currentArchetype.category}
               </span>
 
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-light mb-6 text-gray-800 leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-light mb-6 text-white leading-tight tracking-tight">
                 {currentArchetype.name}
               </h1>
 
-              <p className="text-xl md:text-2xl text-gray-600 font-light mb-8 leading-relaxed">
+              <p className="text-xl md:text-2xl text-gray-300 font-light mb-8 leading-relaxed">
                 {currentArchetype.essence}
               </p>
 
@@ -1278,12 +1325,12 @@ export default function ArchetypePage({ params }: ArchetypePageProps) {
                 {currentArchetype.keywords.map((keyword, index) => (
                   <div
                     key={keyword}
-                    className="flex items-center gap-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-full border border-gray-200/50 shadow-sm"
+                    className="flex items-center gap-2 bg-gray-900/40 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10"
                   >
-                    {index === 0 && <Compass className="h-4 w-4 text-amber-600" />}
-                    {index === 1 && <Heart className="h-4 w-4 text-amber-600" />}
-                    {index === 2 && <Star className="h-4 w-4 text-amber-600" />}
-                    <span className="text-sm font-medium text-gray-700">{keyword}</span>
+                    {index === 0 && <Compass className="h-4 w-4 text-purple-400" />}
+                    {index === 1 && <Heart className="h-4 w-4 text-pink-400" />}
+                    {index === 2 && <Star className="h-4 w-4 text-blue-400" />}
+                    <span className="text-sm font-light text-gray-300 tracking-wide">{keyword}</span>
                   </div>
                 ))}
               </div>
@@ -1299,7 +1346,7 @@ export default function ArchetypePage({ params }: ArchetypePageProps) {
               <img
                 src={currentArchetype.image || "/placeholder.svg"}
                 alt={currentArchetype.name}
-                className="w-full max-w-lg mx-auto h-auto object-contain rounded-3xl shadow-2xl"
+                className="w-full max-w-lg mx-auto h-auto object-contain rounded-3xl shadow-2xl border border-white/10"
               />
               <div className={`absolute inset-0 bg-gradient-to-t ${currentArchetype.color} opacity-10 rounded-3xl`} />
             </motion.div>
@@ -1308,7 +1355,7 @@ export default function ArchetypePage({ params }: ArchetypePageProps) {
       </section>
 
       {/* Core Essence Section */}
-      <section className="py-16 bg-white/80 backdrop-blur-md">
+      <section className="py-16 bg-gray-900/40 backdrop-blur-xl">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
             <motion.div
@@ -1318,9 +1365,9 @@ export default function ArchetypePage({ params }: ArchetypePageProps) {
               viewport={{ once: true }}
               className="text-center"
             >
-              <h2 className="text-3xl md:text-4xl font-light mb-8 text-gray-800">Core Essence</h2>
-              <div className="bg-gradient-to-r from-amber-50 to-pink-50 rounded-3xl p-8 md:p-12 border border-amber-200/50 shadow-lg">
-                <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+              <h2 className="text-3xl md:text-4xl font-light mb-8 text-white tracking-tight">Core Essence</h2>
+              <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-3xl p-8 md:p-12 border border-white/10 shadow-2xl shadow-purple-500/10">
+                <p className="text-lg md:text-xl text-gray-300 leading-relaxed font-light">
                   {currentArchetype.content.coreEssence}
                 </p>
               </div>
@@ -1344,17 +1391,19 @@ export default function ArchetypePage({ params }: ArchetypePageProps) {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-white/80 backdrop-blur-md rounded-3xl border border-gray-200/50 shadow-lg overflow-hidden"
+                  className="bg-gray-900/40 backdrop-blur-xl rounded-3xl border border-white/10 shadow-lg overflow-hidden"
                 >
                   <button
                     onClick={() => toggleSection(section.id)}
-                    className="w-full p-6 md:p-8 flex items-center justify-between hover:bg-gray-50/50 transition-colors"
+                    className="w-full p-6 md:p-8 flex items-center justify-between hover:bg-white/5 transition-colors"
                   >
                     <div className="flex items-center gap-4">
-                      <div className="bg-amber-100 p-3 rounded-full">
-                        <Icon className="h-6 w-6 text-amber-600" />
+                      <div className="bg-purple-500/20 p-3 rounded-full border border-purple-500/30">
+                        <Icon className="h-6 w-6 text-purple-400" />
                       </div>
-                      <h3 className="text-xl md:text-2xl font-medium text-gray-800 text-left">{section.title}</h3>
+                      <h3 className="text-xl md:text-2xl font-light text-white text-left tracking-tight">
+                        {section.title}
+                      </h3>
                     </div>
                     {isExpanded ? (
                       <ChevronUp className="h-6 w-6 text-gray-400" />
@@ -1373,38 +1422,40 @@ export default function ArchetypePage({ params }: ArchetypePageProps) {
                     >
                       {section.id === "lifestyle" && (
                         <div className="space-y-6">
-                          <p className="text-gray-700 leading-relaxed text-lg">
+                          <p className="text-gray-300 leading-relaxed text-lg font-light">
                             {currentArchetype.content.lifestyle.description}
                           </p>
                           <div>
-                            <h4 className="font-medium text-gray-800 mb-4 text-lg">They value:</h4>
+                            <h4 className="font-medium text-white mb-4 text-lg">They value:</h4>
                             <ul className="space-y-3">
                               {currentArchetype.content.lifestyle.values.map((value, i) => (
                                 <li key={i} className="flex items-start gap-3">
-                                  <CheckCircle className="h-5 w-5 text-amber-600 mt-1 flex-shrink-0" />
-                                  <span className="text-gray-700 text-lg">{value}</span>
+                                  <CheckCircle className="h-5 w-5 text-purple-400 mt-1 flex-shrink-0" />
+                                  <span className="text-gray-300 text-lg font-light">{value}</span>
                                 </li>
                               ))}
                             </ul>
                           </div>
-                          <div className="bg-amber-50 rounded-2xl p-6 border border-amber-200">
-                            <p className="text-amber-800 italic text-lg">{currentArchetype.content.lifestyle.note}</p>
+                          <div className="bg-purple-500/10 rounded-2xl p-6 border border-purple-500/20">
+                            <p className="text-purple-200 italic text-lg font-light">
+                              {currentArchetype.content.lifestyle.note}
+                            </p>
                           </div>
                         </div>
                       )}
 
                       {section.id === "dayInLife" && (
                         <div className="space-y-6">
-                          <p className="text-gray-700 mb-6 text-lg">
+                          <p className="text-gray-300 mb-6 text-lg font-light">
                             A typical day in the life of a {currentArchetype.name}:
                           </p>
                           <ul className="space-y-4">
                             {currentArchetype.content.dayInLife.map((item, i) => (
                               <li key={i} className="flex items-start gap-4">
-                                <span className="bg-amber-100 text-amber-600 rounded-full w-8 h-8 flex items-center justify-center text-sm font-medium mt-1 flex-shrink-0">
+                                <span className="bg-purple-500/20 text-purple-300 rounded-full w-8 h-8 flex items-center justify-center text-sm font-medium mt-1 flex-shrink-0 border border-purple-500/30">
                                   {i + 1}
                                 </span>
-                                <span className="text-gray-700 text-lg leading-relaxed">{item}</span>
+                                <span className="text-gray-300 text-lg leading-relaxed font-light">{item}</span>
                               </li>
                             ))}
                           </ul>
@@ -1413,16 +1464,16 @@ export default function ArchetypePage({ params }: ArchetypePageProps) {
 
                       {section.id === "work" && (
                         <div className="space-y-6">
-                          <p className="text-gray-700 leading-relaxed text-lg">
+                          <p className="text-gray-300 leading-relaxed text-lg font-light">
                             Common work and creative paths for {currentArchetype.name}s:
                           </p>
                           <div>
-                            <h4 className="font-medium text-gray-800 mb-4 text-lg">Examples include:</h4>
+                            <h4 className="font-medium text-white mb-4 text-lg">Examples include:</h4>
                             <ul className="space-y-3">
                               {currentArchetype.content.workPaths.map((path, i) => (
                                 <li key={i} className="flex items-start gap-3">
-                                  <Star className="h-5 w-5 text-amber-600 mt-1 flex-shrink-0" />
-                                  <span className="text-gray-700 text-lg">{path}</span>
+                                  <Star className="h-5 w-5 text-purple-400 mt-1 flex-shrink-0" />
+                                  <span className="text-gray-300 text-lg font-light">{path}</span>
                                 </li>
                               ))}
                             </ul>
@@ -1432,17 +1483,17 @@ export default function ArchetypePage({ params }: ArchetypePageProps) {
 
                       {section.id === "money" && (
                         <div className="space-y-6">
-                          <p className="text-gray-700 leading-relaxed text-lg">
+                          <p className="text-gray-300 leading-relaxed text-lg font-light">
                             {currentArchetype.content.money.description}
                           </p>
                           {currentArchetype.content.money.wealth && (
                             <div>
-                              <h4 className="font-medium text-gray-800 mb-4 text-lg">Their wealth is measured in:</h4>
+                              <h4 className="font-medium text-white mb-4 text-lg">Their wealth is measured in:</h4>
                               <ul className="space-y-3">
                                 {currentArchetype.content.money.wealth.map((item, i) => (
                                   <li key={i} className="flex items-start gap-3">
-                                    <div className="w-3 h-3 bg-amber-600 rounded-full mt-2 flex-shrink-0" />
-                                    <span className="text-gray-700 text-lg">{item}</span>
+                                    <div className="w-3 h-3 bg-purple-400 rounded-full mt-2 flex-shrink-0" />
+                                    <span className="text-gray-300 text-lg font-light">{item}</span>
                                   </li>
                                 ))}
                               </ul>
@@ -1450,12 +1501,12 @@ export default function ArchetypePage({ params }: ArchetypePageProps) {
                           )}
                           {currentArchetype.content.money.priorities && (
                             <div>
-                              <h4 className="font-medium text-gray-800 mb-4 text-lg">They may prioritize:</h4>
+                              <h4 className="font-medium text-white mb-4 text-lg">They may prioritize:</h4>
                               <ul className="space-y-3">
                                 {currentArchetype.content.money.priorities.map((priority, i) => (
                                   <li key={i} className="flex items-start gap-3">
-                                    <div className="w-3 h-3 bg-amber-600 rounded-full mt-2 flex-shrink-0" />
-                                    <span className="text-gray-700 text-lg">{priority}</span>
+                                    <div className="w-3 h-3 bg-purple-400 rounded-full mt-2 flex-shrink-0" />
+                                    <span className="text-gray-300 text-lg font-light">{priority}</span>
                                   </li>
                                 ))}
                               </ul>
@@ -1463,19 +1514,19 @@ export default function ArchetypePage({ params }: ArchetypePageProps) {
                           )}
                           {currentArchetype.content.money.approach && (
                             <div>
-                              <h4 className="font-medium text-gray-800 mb-4 text-lg">They approach money with:</h4>
+                              <h4 className="font-medium text-white mb-4 text-lg">They approach money with:</h4>
                               <ul className="space-y-3">
                                 {currentArchetype.content.money.approach.map((approach, i) => (
                                   <li key={i} className="flex items-start gap-3">
-                                    <div className="w-3 h-3 bg-amber-600 rounded-full mt-2 flex-shrink-0" />
-                                    <span className="text-gray-700 text-lg">{approach}</span>
+                                    <div className="w-3 h-3 bg-purple-400 rounded-full mt-2 flex-shrink-0" />
+                                    <span className="text-gray-300 text-lg font-light">{approach}</span>
                                   </li>
                                 ))}
                               </ul>
                             </div>
                           )}
-                          <div className="bg-amber-50 rounded-2xl p-6 border border-amber-200">
-                            <p className="text-amber-800 font-medium italic text-lg">
+                          <div className="bg-purple-500/10 rounded-2xl p-6 border border-purple-500/20">
+                            <p className="text-purple-200 font-medium italic text-lg">
                               {currentArchetype.content.money.motto}
                             </p>
                           </div>
@@ -1484,19 +1535,17 @@ export default function ArchetypePage({ params }: ArchetypePageProps) {
 
                       {section.id === "relationships" && (
                         <div className="space-y-6">
-                          <p className="text-gray-700 leading-relaxed text-lg">
+                          <p className="text-gray-300 leading-relaxed text-lg font-light">
                             {currentArchetype.content.relationships.description}
                           </p>
                           {currentArchetype.content.relationships.needs && (
                             <div>
-                              <h4 className="font-medium text-gray-800 mb-4 text-lg">
-                                What they need in relationship:
-                              </h4>
+                              <h4 className="font-medium text-white mb-4 text-lg">What they need in relationship:</h4>
                               <ul className="space-y-3">
                                 {currentArchetype.content.relationships.needs.map((need, i) => (
                                   <li key={i} className="flex items-start gap-3">
-                                    <Heart className="h-5 w-5 text-rose-600 mt-1 flex-shrink-0" />
-                                    <span className="text-gray-700 text-lg">{need}</span>
+                                    <Heart className="h-5 w-5 text-pink-400 mt-1 flex-shrink-0" />
+                                    <span className="text-gray-300 text-lg font-light">{need}</span>
                                   </li>
                                 ))}
                               </ul>
@@ -1504,12 +1553,12 @@ export default function ArchetypePage({ params }: ArchetypePageProps) {
                           )}
                           {currentArchetype.content.relationships.brings && (
                             <div>
-                              <h4 className="font-medium text-gray-800 mb-4 text-lg">What they bring to love:</h4>
+                              <h4 className="font-medium text-white mb-4 text-lg">What they bring to love:</h4>
                               <ul className="space-y-3">
                                 {currentArchetype.content.relationships.brings.map((bring, i) => (
                                   <li key={i} className="flex items-start gap-3">
-                                    <Heart className="h-5 w-5 text-rose-600 mt-1 flex-shrink-0" />
-                                    <span className="text-gray-700 text-lg">{bring}</span>
+                                    <Heart className="h-5 w-5 text-pink-400 mt-1 flex-shrink-0" />
+                                    <span className="text-gray-300 text-lg font-light">{bring}</span>
                                   </li>
                                 ))}
                               </ul>
@@ -1517,19 +1566,19 @@ export default function ArchetypePage({ params }: ArchetypePageProps) {
                           )}
                           {currentArchetype.content.relationships.offers && (
                             <div>
-                              <h4 className="font-medium text-gray-800 mb-4 text-lg">In relationships, they offer:</h4>
+                              <h4 className="font-medium text-white mb-4 text-lg">In relationships, they offer:</h4>
                               <ul className="space-y-3">
                                 {currentArchetype.content.relationships.offers.map((offer, i) => (
                                   <li key={i} className="flex items-start gap-3">
-                                    <Heart className="h-5 w-5 text-rose-600 mt-1 flex-shrink-0" />
-                                    <span className="text-gray-700 text-lg">{offer}</span>
+                                    <Heart className="h-5 w-5 text-pink-400 mt-1 flex-shrink-0" />
+                                    <span className="text-gray-300 text-lg font-light">{offer}</span>
                                   </li>
                                 ))}
                               </ul>
                             </div>
                           )}
-                          <div className="bg-rose-50 rounded-2xl p-6 border border-rose-200">
-                            <p className="text-rose-800 italic text-lg">
+                          <div className="bg-pink-500/10 rounded-2xl p-6 border border-pink-500/20">
+                            <p className="text-pink-200 italic text-lg font-light">
                               {currentArchetype.content.relationships.note}
                             </p>
                           </div>
@@ -1538,34 +1587,36 @@ export default function ArchetypePage({ params }: ArchetypePageProps) {
 
                       {section.id === "challenges" && (
                         <div className="space-y-6">
-                          <p className="text-gray-700 leading-relaxed text-lg">
+                          <p className="text-gray-300 leading-relaxed text-lg font-light">
                             The {currentArchetype.name} may face these challenges:
                           </p>
                           <ul className="space-y-3">
                             {currentArchetype.content.challenges.map((challenge, i) => (
                               <li key={i} className="flex items-start gap-3">
                                 <div className="w-3 h-3 bg-red-400 rounded-full mt-2 flex-shrink-0" />
-                                <span className="text-gray-700 text-lg">{challenge}</span>
+                                <span className="text-gray-300 text-lg font-light">{challenge}</span>
                               </li>
                             ))}
                           </ul>
-                          <div className="bg-green-50 rounded-2xl p-6 border border-green-200">
-                            <h4 className="font-medium text-green-800 mb-3 text-lg">Growth Edge:</h4>
-                            <p className="text-green-700 text-lg">{currentArchetype.content.growth}</p>
+                          <div className="bg-green-500/10 rounded-2xl p-6 border border-green-500/20">
+                            <h4 className="font-medium text-green-300 mb-3 text-lg">Growth Edge:</h4>
+                            <p className="text-green-200 text-lg font-light">{currentArchetype.content.growth}</p>
                           </div>
                         </div>
                       )}
 
                       {section.id === "signs" && (
                         <div className="space-y-6">
-                          <p className="text-gray-700 mb-6 text-lg">You might be a {currentArchetype.name} if:</p>
+                          <p className="text-gray-300 mb-6 text-lg font-light">
+                            You might be a {currentArchetype.name} if:
+                          </p>
                           <ul className="space-y-4">
                             {currentArchetype.content.signs.map((sign, i) => (
                               <li key={i} className="flex items-start gap-4">
-                                <span className="bg-amber-100 text-amber-600 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mt-1 flex-shrink-0">
+                                <span className="bg-purple-500/20 text-purple-300 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mt-1 flex-shrink-0 border border-purple-500/30">
                                   ✓
                                 </span>
-                                <span className="text-gray-700 text-lg leading-relaxed">{sign}</span>
+                                <span className="text-gray-300 text-lg leading-relaxed font-light">{sign}</span>
                               </li>
                             ))}
                           </ul>
@@ -1574,18 +1625,18 @@ export default function ArchetypePage({ params }: ArchetypePageProps) {
 
                       {section.id === "mantras" && (
                         <div className="space-y-6">
-                          <p className="text-gray-700 mb-6 text-lg">
+                          <p className="text-gray-300 mb-6 text-lg font-light">
                             These mantras and anchors can guide {currentArchetype.name}s on their journey:
                           </p>
                           <div className="grid grid-cols-1 gap-4">
                             {currentArchetype.content.mantras.map((mantra, i) => (
                               <div
                                 key={i}
-                                className="bg-gradient-to-r from-amber-50 to-pink-50 rounded-2xl p-6 border border-amber-200/50 shadow-sm"
+                                className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-2xl p-6 border border-white/10 shadow-lg"
                               >
                                 <div className="flex items-start gap-4">
-                                  <Quote className="h-6 w-6 text-amber-600 mt-1 flex-shrink-0" />
-                                  <p className="text-lg font-medium text-gray-800 italic">{mantra}</p>
+                                  <Quote className="h-6 w-6 text-purple-400 mt-1 flex-shrink-0" />
+                                  <p className="text-lg font-light text-gray-200 italic">{mantra}</p>
                                 </div>
                               </div>
                             ))}
@@ -1602,7 +1653,7 @@ export default function ArchetypePage({ params }: ArchetypePageProps) {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-amber-50 to-pink-50">
+      <section className="py-16 bg-gradient-to-r from-purple-500/10 to-pink-500/10">
         <div className="container mx-auto px-6">
           <div className="max-w-3xl mx-auto text-center">
             <motion.div
@@ -1611,22 +1662,22 @@ export default function ArchetypePage({ params }: ArchetypePageProps) {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-12 border border-amber-200/50 shadow-lg">
-                <h2 className="text-3xl md:text-4xl font-light mb-6 text-gray-800">
+              <div className="bg-gray-900/40 backdrop-blur-xl rounded-3xl p-12 border border-white/10 shadow-2xl shadow-purple-500/10">
+                <h2 className="text-3xl md:text-4xl font-light mb-6 text-white tracking-tight">
                   Ready to Connect With Others Like You?
                 </h2>
-                <p className="text-xl text-gray-600 mb-10 leading-relaxed">
+                <p className="text-xl text-gray-300 mb-10 leading-relaxed font-light">
                   Join Creator Being to dive deeper into your archetype and connect with a community of people walking
                   similar paths.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-6 justify-center">
                   <Link href="/membership">
-                    <button className="bg-gradient-to-r from-amber-400 to-pink-400 hover:from-amber-500 hover:to-pink-500 text-white px-10 py-4 rounded-full font-medium text-lg transition-all duration-300 shadow-lg hover:shadow-xl">
+                    <button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-10 py-4 rounded-full font-light text-lg transition-all duration-300 shadow-lg shadow-purple-500/30 tracking-wide">
                       Join the Community
                     </button>
                   </Link>
                   <Link href="/archetype-explorer">
-                    <button className="border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 px-10 py-4 rounded-full font-medium text-lg transition-all duration-300">
+                    <button className="border border-white/20 text-gray-300 hover:text-white hover:bg-white/5 hover:border-white/40 px-10 py-4 rounded-full font-light text-lg transition-all duration-300 tracking-wide">
                       Explore Other Archetypes
                     </button>
                   </Link>
