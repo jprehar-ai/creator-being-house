@@ -8,7 +8,7 @@ const fallbackStoreDomain = "v0-template.myshopify.com"
 const SHOPIFY_STORE_DOMAIN = rawStoreDomain ? parseShopifyDomain(rawStoreDomain) : fallbackStoreDomain
 const SHOPIFY_STOREFRONT_ACCESS_TOKEN = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN
 
-const SHOPIFY_STOREFRONT_API_URL = `https://${SHOPIFY_STORE_DOMAIN}/api/2025-01/graphql.json`
+const SHOPIFY_STOREFRONT_API_URL = `https://${SHOPIFY_STORE_DOMAIN}/api/2024-10/graphql.json`
 
 // Shopify API request with access token
 async function shopifyFetch<T>({
@@ -23,7 +23,6 @@ async function shopifyFetch<T>({
       "Content-Type": "application/json",
     }
 
-    // Add access token if available
     if (SHOPIFY_STOREFRONT_ACCESS_TOKEN) {
       headers["X-Shopify-Storefront-Access-Token"] = SHOPIFY_STOREFRONT_ACCESS_TOKEN
     }
@@ -40,20 +39,17 @@ async function shopifyFetch<T>({
 
     if (!response.ok) {
       const errorBody = await response.text()
-      console.error("Shopify API HTTP error:", { status: response.status })
       throw new Error(`Shopify API HTTP error! Status: ${response.status}`)
     }
 
     const json = await response.json()
 
     if (json.errors) {
-      console.error("Shopify API errors:", json.errors)
       throw new Error(`Shopify GraphQL errors: ${JSON.stringify(json.errors)}`)
     }
 
     return json
   } catch (error) {
-    console.error("Shopify fetch error:", error)
     throw error
   }
 }

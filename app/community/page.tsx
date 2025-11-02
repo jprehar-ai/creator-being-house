@@ -71,6 +71,29 @@ export default function CommunityPage() {
         <div className="absolute bottom-[-20%] right-[-10%] w-[700px] h-[700px] rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 opacity-25 blur-[140px]" />
 
         <div className="relative z-10 max-w-5xl mx-auto text-center">
+          <div className="flex justify-center mb-12">
+            <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-xl text-purple-300 px-6 py-3 rounded-full text-sm font-medium border border-white/10 shadow-[0_0_30px_rgba(168,85,247,0.3)]">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-4 w-4"
+              >
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+              Community
+            </div>
+          </div>
+
           <h1 className="text-6xl md:text-8xl font-bold leading-[1.05] mb-8 text-balance">
             Where Creativity
             <br />
