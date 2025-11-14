@@ -14,6 +14,7 @@ export default function MembershipPage() {
   const [selectedPlan, setSelectedPlan] = useState<"monthly" | "annual">("monthly")
   const [showWaitlistModal, setShowWaitlistModal] = useState(false)
   const [email, setEmail] = useState("")
+  const [copied, setCopied] = useState(false)
 
   const fullText =
     "The Creator Being House is a daily rhythm for your inner world. It's made of six interactive rooms that support your energy, emotion, and expression. One helps you reset. One rewrites your thoughts. One brings your ideas to life. The others hold your dreams, your learning, and how you want to feel in your body each day. Whether you stay for five minutes or dive deep, the House adapts to you — steady, flexible, and designed to help you live in tune with your own inner frequency. You create through your vibration — and the House was built to help you remember how. How to tune into your internal state, shape your reality from the inside out, and move through life as the creator you already are."
@@ -170,6 +171,29 @@ export default function MembershipPage() {
     )
     
     return `mailto:jem@creatorbeing.co?subject=${subject}&body=${body}`
+  }
+
+  const copyToClipboard = () => {
+    const message = `Hi Jem,
+
+I'd like to join the waitlist for the Creator Being House!
+
+My email: ${email || "[Your Email]"}
+Selected Plan: ${selectedPlan === "monthly" ? "Monthly ($30/month)" : "Annual ($288/year)"}
+
+Looking forward to hearing from you!
+
+Best,
+[Your Name]`
+    
+    navigator.clipboard.writeText(message).then(() => {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 3000)
+    })
+  }
+
+  const openEmailClient = () => {
+    window.location.href = getMailtoUrl()
   }
 
   return (
@@ -696,7 +720,7 @@ export default function MembershipPage() {
                 </div>
 
                 <p className="text-gray-300 mb-6 leading-relaxed">
-                  Click the button below to send an email to join the waitlist. We'll get back to you soon!
+                  Choose your preferred method to join the waitlist:
                 </p>
 
                 <div className="space-y-4">
@@ -712,7 +736,7 @@ export default function MembershipPage() {
                       placeholder="your@email.com"
                       className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all text-white placeholder-gray-500"
                     />
-                    <p className="text-xs text-gray-500 mt-1">We'll include this in the email for you</p>
+                    <p className="text-xs text-gray-500 mt-1">We'll include this in the message</p>
                   </div>
 
                   <div className="bg-purple-500/10 border border-purple-500/20 rounded-xl p-4">
@@ -722,17 +746,60 @@ export default function MembershipPage() {
                     </p>
                   </div>
 
-                  <a
-                    href={getMailtoUrl()}
-                    className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-6 py-3 rounded-xl font-medium transition-all inline-flex items-center justify-center gap-2 shadow-[0_0_30px_rgba(168,85,247,0.4)]"
-                  >
-                    <Mail className="h-5 w-5" />
-                    Send Email to Join
-                  </a>
+                  <div className="space-y-3">
+                    <button
+                      onClick={copyToClipboard}
+                      className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-6 py-3 rounded-xl font-medium transition-all inline-flex items-center justify-center gap-2 shadow-[0_0_30px_rgba(168,85,247,0.4)]"
+                    >
+                      {copied ? (
+                        <>
+                          <Check className="h-5 w-5" />
+                          Copied to Clipboard!
+                        </>
+                      ) : (
+                        <>
+                          <Mail className="h-5 w-5" />
+                          Copy Message & Email
+                        </>
+                      )}
+                    </button>
+
+                    {copied && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="bg-green-500/10 border border-green-500/20 rounded-xl p-4"
+                      >
+                        <p className="text-sm text-green-300 text-center">
+                          Message copied! Now email it to:{" "}
+                          <a href="mailto:jem@creatorbeing.co" className="font-medium underline">
+                            jem@creatorbeing.co
+                          </a>
+                        </p>
+                      </motion.div>
+                    )}
+
+                    <div className="relative">
+                      <div className="absolute inset-0 flex items-center">
+                        <div className="w-full border-t border-gray-700"></div>
+                      </div>
+                      <div className="relative flex justify-center text-sm">
+                        <span className="px-2 bg-gray-900 text-gray-500">or</span>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={openEmailClient}
+                      className="w-full bg-white/5 hover:bg-white/10 text-white px-6 py-3 rounded-xl font-medium transition-all inline-flex items-center justify-center gap-2 border border-white/10"
+                    >
+                      <Mail className="h-5 w-5" />
+                      Open Email Client
+                    </button>
+                  </div>
                 </div>
 
                 <p className="text-xs text-gray-500 text-center mt-4">
-                  This will open your email client with a pre-filled message
+                  We recommend copying the message if you use Gmail or web-based email
                 </p>
               </>
             </motion.div>
