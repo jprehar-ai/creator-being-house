@@ -2,7 +2,7 @@
 
 import { ProductCard } from "@/components/products/product-card"
 import { FeaturedProductCard } from "@/components/products/featured-product-card"
-import { ShoppingBag, AlertCircle } from "lucide-react"
+import { ShoppingBag, AlertCircle, Star } from 'lucide-react'
 import { motion } from "framer-motion"
 
 interface ShopPageClientProps {
@@ -12,6 +12,8 @@ interface ShopPageClientProps {
 }
 
 export function ShopPageClient({ products, featuredProduct, error }: ShopPageClientProps) {
+  const allProducts = featuredProduct ? [featuredProduct, ...products] : products
+
   return (
     <div className="relative overflow-hidden bg-gray-950 min-h-screen">
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
@@ -136,7 +138,7 @@ export function ShopPageClient({ products, featuredProduct, error }: ShopPageCli
                 </a>
               </div>
             </motion.div>
-          ) : products.length === 0 && !featuredProduct ? (
+          ) : allProducts.length === 0 ? (
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-2xl mx-auto">
               <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-12 text-center shadow-[0_0_40px_rgba(168,85,247,0.2)]">
                 <p className="text-gray-300 text-lg mb-4">No products available at the moment.</p>
@@ -154,44 +156,38 @@ export function ShopPageClient({ products, featuredProduct, error }: ShopPageCli
               </div>
             </motion.div>
           ) : (
-            <>
-              {featuredProduct && (
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8 }}
-                  className="mb-20"
-                >
-                  <FeaturedProductCard product={featuredProduct} />
-                </motion.div>
-              )}
-
-              {products.length > 0 && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                >
-                  <div className="mb-12 text-center">
-                    <h2 className="text-4xl md:text-5xl font-light bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 bg-clip-text text-transparent">
-                      More Products
-                    </h2>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16">
-                    {products.map((product, index) => (
-                      <motion.div
-                        key={product.id}
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: index * 0.1 }}
-                      >
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16">
+                {allProducts.map((product, index) => {
+                  const isFeatured = index === 0 && featuredProduct && product.id === featuredProduct.id
+                  
+                  return (
+                    <motion.div
+                      key={product.id}
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      className={isFeatured ? "relative" : ""}
+                    >
+                      {isFeatured && (
+                        <div className="absolute -top-3 -right-3 z-10">
+                          <div className="bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 text-white px-3 py-1.5 rounded-full text-xs font-medium flex items-center gap-1.5 shadow-[0_0_20px_rgba(168,85,247,0.6)]">
+                            <Star className="h-3 w-3 fill-current" />
+                            Featured
+                          </div>
+                        </div>
+                      )}
+                      <div className={isFeatured ? "ring-2 ring-purple-500/50 rounded-2xl shadow-[0_0_30px_rgba(168,85,247,0.4)]" : ""}>
                         <ProductCard product={product} />
-                      </motion.div>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
+                      </div>
+                    </motion.div>
+                  )
+                })}
+              </div>
 
               <motion.div
                 initial={{ opacity: 0 }}
@@ -222,7 +218,7 @@ export function ShopPageClient({ products, featuredProduct, error }: ShopPageCli
                   </a>
                 </div>
               </motion.div>
-            </>
+            </motion.div>
           )}
         </div>
       </section>

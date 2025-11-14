@@ -2,7 +2,7 @@
 
 import type React from "react"
 import { useState } from "react"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { joinCommunity } from "@/app/actions/community"
@@ -231,34 +231,6 @@ export default function CommunityPage() {
             Join our community where art doesn't just get posted, it gets shared, gifted, and celebrated in real,
             tangible ways. Help us reach 100 members to begin the monthly creative cycle.
           </p>
-
-          <form onSubmit={handleSubmit} className="max-w-lg mx-auto mb-12">
-            {showSuccess ? (
-              <div className="bg-green-500/20 border border-green-500/50 rounded-2xl p-6 mb-4 shadow-[0_0_30px_rgba(34,197,94,0.3)]">
-                <p className="text-green-400 font-medium text-lg">✓ You're on the list! We'll be in touch soon.</p>
-              </div>
-            ) : (
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Input
-                  type="email"
-                  placeholder="Enter your email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="flex-1 px-6 py-6 text-lg rounded-2xl bg-white/10 backdrop-blur-md border-white/20 text-white placeholder:text-white/40 focus:border-purple-500/50 focus:shadow-[0_0_30px_rgba(168,85,247,0.3)]"
-                  required
-                  disabled={isSubmitting}
-                />
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="px-10 py-6 text-lg rounded-2xl font-medium whitespace-nowrap bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 shadow-[0_0_40px_rgba(168,85,247,0.4)] hover:shadow-[0_0_60px_rgba(168,85,247,0.6)] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? "Joining..." : "Join the House"}
-                  {!isSubmitting && <ArrowRight className="w-5 h-5 ml-2" />}
-                </Button>
-              </div>
-            )}
-          </form>
 
           <p className="text-xl font-medium tracking-wide text-white/80">Create. Share. Circulate.</p>
         </div>

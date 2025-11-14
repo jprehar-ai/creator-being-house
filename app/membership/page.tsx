@@ -1,12 +1,10 @@
 "use client"
 
 import type React from "react"
-
 import { motion, AnimatePresence } from "framer-motion"
-import { ChevronDown, ChevronUp, ArrowRight, Play, Pause, Check, Share2, Gift, Sparkles, X, Mail } from "lucide-react"
+import { ChevronDown, ChevronUp, ArrowRight, Play, Pause, Check, Share2, Gift, Sparkles, X, Mail } from 'lucide-react'
 import { useState, useEffect } from "react"
 import Image from "next/image"
-import { joinWaitlist } from "@/app/actions/waitlist"
 
 export default function MembershipPage() {
   const [expandedRoom, setExpandedRoom] = useState<number | null>(null)
@@ -16,8 +14,6 @@ export default function MembershipPage() {
   const [selectedPlan, setSelectedPlan] = useState<"monthly" | "annual">("monthly")
   const [showWaitlistModal, setShowWaitlistModal] = useState(false)
   const [email, setEmail] = useState("")
-  const [showSuccess, setShowSuccess] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const fullText =
     "The Creator Being House is a daily rhythm for your inner world. It's made of six interactive rooms that support your energy, emotion, and expression. One helps you reset. One rewrites your thoughts. One brings your ideas to life. The others hold your dreams, your learning, and how you want to feel in your body each day. Whether you stay for five minutes or dive deep, the House adapts to you — steady, flexible, and designed to help you live in tune with your own inner frequency. You create through your vibration — and the House was built to help you remember how. How to tune into your internal state, shape your reality from the inside out, and move through life as the creator you already are."
@@ -167,43 +163,17 @@ export default function MembershipPage() {
     setIsTypewriterPlaying(true)
   }
 
-  const handleWaitlistSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (email && !isSubmitting) {
-      setIsSubmitting(true)
-
-      try {
-        const result = await joinWaitlist(email, selectedPlan)
-
-        if (result.success) {
-          setShowSuccess(true)
-          setTimeout(() => {
-            setShowWaitlistModal(false)
-            setShowSuccess(false)
-            setEmail("")
-            setIsSubmitting(false)
-          }, 3000)
-        } else {
-          alert("Something went wrong. Please try again.")
-          setIsSubmitting(false)
-        }
-      } catch (error) {
-        console.error("Error submitting waitlist:", error)
-        alert("Something went wrong. Please try again.")
-        setIsSubmitting(false)
-      }
-    }
+  const getMailtoUrl = () => {
+    const subject = encodeURIComponent("Waitlist: Creator Being House Membership")
+    const body = encodeURIComponent(
+      `Hi Jem,\n\nI'd like to join the waitlist for the Creator Being House!\n\nMy email: ${email || "[Your Email]"}\nSelected Plan: ${selectedPlan === "monthly" ? "Monthly ($30/month)" : "Annual ($288/year)"}\n\nLooking forward to hearing from you!\n\nBest,\n[Your Name]`
+    )
+    
+    return `mailto:jem@creatorbeing.co?subject=${subject}&body=${body}`
   }
 
   return (
     <div className="relative overflow-hidden bg-gray-950 min-h-screen">
-      {/* SEO Meta Tags */}
-      <title>Be a Founding Member - Creator Being House</title>
-      <meta
-        name="description"
-        content="Join as a founding member of Creator Being House - six interactive rooms to help you feel more, force less, and shape your life from the inside out."
-      />
-
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         <motion.div
           className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full opacity-20"
@@ -714,73 +684,57 @@ export default function MembershipPage() {
               className="bg-gray-900/90 backdrop-blur-xl rounded-3xl p-8 max-w-md w-full shadow-[0_0_60px_rgba(168,85,247,0.4)] border border-white/10"
               onClick={(e) => e.stopPropagation()}
             >
-              {!showSuccess ? (
-                <>
-                  <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-2xl font-medium text-white">Join the Waitlist</h3>
-                    <button
-                      onClick={() => setShowWaitlistModal(false)}
-                      className="text-gray-400 hover:text-gray-200 transition-colors"
-                    >
-                      <X className="h-6 w-6" />
-                    </button>
+              <>
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-2xl font-medium text-white">Join the Waitlist</h3>
+                  <button
+                    onClick={() => setShowWaitlistModal(false)}
+                    className="text-gray-400 hover:text-gray-200 transition-colors"
+                  >
+                    <X className="h-6 w-6" />
+                  </button>
+                </div>
+
+                <p className="text-gray-300 mb-6 leading-relaxed">
+                  Click the button below to send an email to join the waitlist. We'll get back to you soon!
+                </p>
+
+                <div className="space-y-4">
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                      Your Email (Optional)
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="your@email.com"
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all text-white placeholder-gray-500"
+                    />
+                    <p className="text-xs text-gray-500 mt-1">We'll include this in the email for you</p>
                   </div>
 
-                  <p className="text-gray-300 mb-6 leading-relaxed">
-                    Be among the first to know when the Creator Being House opens its doors. We'll send you an exclusive
-                    invitation.
-                  </p>
-
-                  <form onSubmit={handleWaitlistSubmit} className="space-y-4">
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                        Email Address
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        placeholder="your@email.com"
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all text-white placeholder-gray-500"
-                      />
-                    </div>
-
-                    <div className="bg-purple-500/10 border border-purple-500/20 rounded-xl p-4">
-                      <p className="text-sm text-gray-300">
-                        <span className="font-medium text-white">Selected Plan:</span>{" "}
-                        {selectedPlan === "monthly" ? "Monthly ($30/month)" : "Annual ($288/year)"}
-                      </p>
-                    </div>
-
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-6 py-3 rounded-xl font-medium transition-all inline-flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_30px_rgba(168,85,247,0.4)]"
-                    >
-                      {isSubmitting ? "Joining..." : "Join Waitlist"}
-                      {!isSubmitting && <ArrowRight className="h-5 w-5" />}
-                    </button>
-                  </form>
-
-                  <p className="text-xs text-gray-500 text-center mt-4">
-                    We respect your privacy. Unsubscribe anytime.
-                  </p>
-                </>
-              ) : (
-                <motion.div
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  className="text-center py-8"
-                >
-                  <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4 shadow-[0_0_30px_rgba(34,197,94,0.4)]">
-                    <Check className="h-8 w-8 text-green-400" />
+                  <div className="bg-purple-500/10 border border-purple-500/20 rounded-xl p-4">
+                    <p className="text-sm text-gray-300">
+                      <span className="font-medium text-white">Selected Plan:</span>{" "}
+                      {selectedPlan === "monthly" ? "Monthly ($30/month)" : "Annual ($288/year)"}
+                    </p>
                   </div>
-                  <h3 className="text-2xl font-medium text-white mb-2">You're on the list!</h3>
-                  <p className="text-gray-300">We'll send you an email when the Creator Being House opens.</p>
-                </motion.div>
-              )}
+
+                  <a
+                    href={getMailtoUrl()}
+                    className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-6 py-3 rounded-xl font-medium transition-all inline-flex items-center justify-center gap-2 shadow-[0_0_30px_rgba(168,85,247,0.4)]"
+                  >
+                    <Mail className="h-5 w-5" />
+                    Send Email to Join
+                  </a>
+                </div>
+
+                <p className="text-xs text-gray-500 text-center mt-4">
+                  This will open your email client with a pre-filled message
+                </p>
+              </>
             </motion.div>
           </motion.div>
         )}

@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
-import { ArrowRight, ChevronDown, X, ShoppingBag, Users } from "lucide-react"
+import { ArrowRight, ChevronDown, X, ShoppingBag, Users } from 'lucide-react'
 import { SectionNavigation } from "@/components/section-navigation"
 
 export default function Page() {
@@ -336,7 +336,7 @@ export default function Page() {
                 </h1>
 
                 <p className="text-lg md:text-xl text-white/90 max-w-xl leading-relaxed font-light">
-                  AI will handle the doing. Humanity must remember the being. This is where that remembering begins.
+                  Automation will handle the doing. Humanity must remember the being. This is where that remembering begins.
                 </p>
               </motion.div>
 
