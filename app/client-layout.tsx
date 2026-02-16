@@ -16,7 +16,7 @@ export default function ClientLayout({
   return (
     <>
       <MainNavigation />
-      <main className="pt-16 relative">{children}</main>
+      <main className="pt-16">{children}</main>
 
       {/* Footer */}
       <footer className="bg-gray-50 border-t border-gray-200">
