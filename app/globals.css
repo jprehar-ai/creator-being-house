@@ -89,7 +89,7 @@ body {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-[#0a0a0f] text-foreground;
   }
 }
 
@@ -245,14 +245,4 @@ body {
   box-shadow: 0 0 8px rgba(252, 211, 77, 0.6);
 }
 
-/* Update the transition-colors class at the end of the file for smoother transitions */
-.transition-all {
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1); /* Smoother easing function */
-}
 
-/* Removed custom duration classes that were causing Tailwind v4 conflicts */
-.transition-colors {
-  transition-property: background, background-color;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}

@@ -194,7 +194,7 @@ export default function Page() {
       </AnimatePresence>
 
       <div
-        className="fixed inset-0 z-0 transition-all duration-[10000ms]"
+        className="absolute inset-0 z-0 transition-all duration-[10000ms]"
         style={{
           background: `linear-gradient(to bottom, 
             rgba(212, 165, 116, 0.15) 0%, 
@@ -207,7 +207,7 @@ export default function Page() {
         }}
       />
 
-      <div className="fixed inset-0 z-[1] overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
         <motion.div
           className="absolute top-[10%] left-[5%] w-[600px] h-[600px] rounded-full opacity-20 blur-[150px]"
           style={{
