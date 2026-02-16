@@ -1,4 +1,13 @@
 {
+  "name": "creator-being-house",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",
     "@radix-ui/react-scroll-area": "latest",
