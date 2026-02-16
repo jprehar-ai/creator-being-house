@@ -134,7 +134,7 @@ export default function Page() {
   }
 
   return (
-    <div className="relative overflow-hidden bg-gray-950" ref={containerRef}>
+    <div className="relative overflow-hidden bg-[#0a0a0f]" ref={containerRef}>
       {/* Scroll Progress Bar */}
       <div className="fixed top-0 left-0 w-full h-1 bg-white/10 z-50">
         <motion.div
@@ -194,7 +194,7 @@ export default function Page() {
       </AnimatePresence>
 
       <div
-        className="fixed inset-0 z-[-2] transition-all duration-[10000ms]"
+        className="fixed inset-0 z-0 transition-all duration-[10000ms]"
         style={{
           background: `linear-gradient(to bottom, 
             rgba(212, 165, 116, 0.15) 0%, 
@@ -207,7 +207,7 @@ export default function Page() {
         }}
       />
 
-      <div className="fixed inset-0 z-[-1] overflow-hidden">
+      <div className="fixed inset-0 z-[1] overflow-hidden pointer-events-none">
         <motion.div
           className="absolute top-[10%] left-[5%] w-[600px] h-[600px] rounded-full opacity-20 blur-[150px]"
           style={{
@@ -283,7 +283,7 @@ export default function Page() {
 
       {/* 1. HERO SECTION */}
       <section
-        className="min-h-screen relative flex flex-col justify-center items-center scroll-mt-0 overflow-hidden"
+        className="min-h-screen relative z-[2] flex flex-col justify-center items-center scroll-mt-0 overflow-hidden"
         ref={(el) => (sectionRefs.current[0] = el)}
         id="hero"
       >
@@ -474,7 +474,7 @@ export default function Page() {
         </motion.div>
       </section>
 
-      <div className="wave-divider relative">
+      <div className="wave-divider relative z-[2]">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" className="w-full h-auto">
           <defs>
             <linearGradient id="waveGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -492,7 +492,7 @@ export default function Page() {
       </div>
 
       {/* 2. THE HOUSE SECTION - Simplified */}
-      <section className="relative py-24 scroll-mt-20" ref={(el) => (sectionRefs.current[1] = el)} id="house">
+      <section className="relative z-[2] py-24 scroll-mt-20" ref={(el) => (sectionRefs.current[1] = el)} id="house">
         <div className="container mx-auto px-6">
           <motion.div
             className="max-w-6xl mx-auto"
@@ -582,7 +582,7 @@ export default function Page() {
       </section>
 
       {/* Wave Divider */}
-      <div className="wave-divider transform rotate-180">
+      <div className="wave-divider transform rotate-180 relative z-[2]">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" className="w-full h-auto">
           <path
             fill="rgba(17, 24, 39, 0.8)"
@@ -594,7 +594,7 @@ export default function Page() {
 
       {/* 3. ARCHETYPE EXPLORER SECTION */}
       <section
-        className="relative py-32 overflow-hidden scroll-mt-20"
+        className="relative z-[2] py-32 overflow-hidden scroll-mt-20"
         ref={(el) => (sectionRefs.current[2] = el)}
         id="archetypes"
       >
@@ -681,7 +681,7 @@ export default function Page() {
       </section>
 
       {/* Wave Divider */}
-      <div className="wave-divider">
+      <div className="wave-divider relative z-[2]">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" className="w-full h-auto">
           <path
             fill="rgba(17, 24, 39, 0.8)"
@@ -691,7 +691,7 @@ export default function Page() {
         </svg>
       </div>
 
-      <section className="relative py-24 scroll-mt-20" ref={(el) => (sectionRefs.current[3] = el)} id="explore">
+      <section className="relative z-[2] py-24 scroll-mt-20" ref={(el) => (sectionRefs.current[3] = el)} id="explore">
         <div className="container mx-auto px-6">
           <motion.div
             className="max-w-6xl mx-auto"
